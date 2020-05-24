@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { MemoryRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
+import axios from 'axios'
 
 // eslint-disable-next-line import/no-unresolved
 import Auth from './pages/Auth'
@@ -8,9 +9,16 @@ import Auth from './pages/Auth'
 import ChatsPage from './pages/ChatsPage'
 
 const App = (): JSX.Element => {
+
+  function attemptLogin(): void {
+    axios.post('https://dislack-web.herokuapp.com/auth/login', { email: 'admin@gmail.com', password: 'admin' },
+      { headers: { 'Access-Control-Allow-Origin': '*' } })
+  }
+
   return (
     <Router>
       <div>Hello world!</div>
+      <button onClick={attemptLogin}>Login</button>
       <div>
         <Link to='/'>Main</Link>
         <Link to='/auth'>Auth</Link>
