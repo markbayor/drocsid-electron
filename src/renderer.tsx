@@ -1,18 +1,18 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { MemoryRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
-import axios from 'axios'
+import { AxiosHttpRequest } from './utils'
 
 // eslint-disable-next-line import/no-unresolved
 import Auth from './pages/Auth'
 // eslint-disable-next-line import/no-unresolved
 import ChatsPage from './pages/ChatsPage'
 
+
 const App = (): JSX.Element => {
 
-  function attemptLogin(): void {
-    axios.post('https://dislack-web.herokuapp.com/auth/login', { email: 'admin@gmail.com', password: 'admin' },
-      { headers: { 'Access-Control-Allow-Origin': '*' } })
+  async function attemptLogin(): Promise<void> {
+    await AxiosHttpRequest('POST', 'http://localhost:5000/auth/login', { email: 'admin@gmail.com', password: 'admin' }).then(data => console.log('DATA', data))
   }
 
   return (
