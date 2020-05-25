@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 export interface UserDetailsType {
-  id: number;
+  id: string;
   username: string;
   email: string;
 }

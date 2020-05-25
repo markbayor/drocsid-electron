@@ -4,7 +4,7 @@ import { AxiosHttpRequest, setJwt } from '../../../utils'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
-import { UserContext, UserDetailsType } from '../../../contexts/UserContext'
+import { UserContext, UserDetailsType } from '../../../contexts/user/UserContext'
 import { useHistory } from 'react-router-dom';
 
 interface SignupFormValues {
