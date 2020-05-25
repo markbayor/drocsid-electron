@@ -8,19 +8,22 @@ const CREATE_CHAT = 'CREATE_CHAT'
 const DELETE_CHAT = 'DELETE_CHAT'
 const ADD_MESSAGE = 'ADD_MESSAGE'
 
+const EMPTY_STATE = 'EMPTY_STATE'
+
 const initialState: ChatsContextType = {
   selectedChat: null,
   chats: [],
 }
 
 function chatsReducer(state = initialState, action: any): ChatsContextType {
-  const newState = { ...state }
+  let newState = { ...state }
   switch (action.type) {
+    case EMPTY_STATE:
+      newState = initialState
+      return newState
     case GET_CHATS:
       newState.chats = action.chats
-      console.log('NEWSTATE', newState)
       return newState;
-
 
     case SET_CHAT:
       newState.selectedChat = action.chat

@@ -13,7 +13,7 @@ import { TeamOutlined, CloseSquareOutlined, CheckSquareOutlined, UserOutlined, M
 
 
 
-const ChatsSidebar = () => {
+const ChatsSidebar = (): JSX.Element => {
 
   const { user } = useContext(UserContext)
   const { friendsState, friendsDispatch } = useContext(FriendsContext)

@@ -16,9 +16,14 @@ const ACCEPT_REQUEST = 'ACCEPT_REQUEST'
 const REJECT_REQUEST = 'REJECT_REQUEST'
 const CANCEL_REQUEST = 'CANCEL_REQUEST'
 
+const EMPTY_STATE = 'EMPTY_STATE'
+
 export default function (state = initialState, action: any): FriendsContextType {
-  const newState = { ...state }
+  let newState = { ...state }
   switch (action.type) {
+    case EMPTY_STATE:
+      newState = initialState
+      return newState
     case GET_FRIENDS:
       newState.friends = action.friends
       return newState

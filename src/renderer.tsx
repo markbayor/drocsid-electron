@@ -1,17 +1,22 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState, useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { MemoryRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
 
 import 'antd/dist/antd.css';
 import './index.css'
 
-import { AxiosHttpRequest, getUser } from './utils'
+import { getUser } from './utils'
 // eslint-disable-next-line import/no-unresolved
 import Auth from './pages/auth/Auth'
 import ChatsPage from './pages/chats/ChatsPage'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UserContext } from './contexts/user/UserContext'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ChatsContext } from './contexts/chats/ChatsContext';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FriendsContext } from './contexts/friends/FriendsContext'
 
 import { chatsReducer } from './contexts/chats/chatsReducer';
@@ -21,6 +26,7 @@ import friendsReducer from './contexts/friends/friendsReducer';
 
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const App = (): JSX.Element => {
   const [user, setUser] = useState(undefined)
 
@@ -31,18 +37,6 @@ const App = (): JSX.Element => {
     getUser(setUser)
   }, [])
 
-  // ////////////////
-  async function attemptLogin(): Promise<void> { // TESTING
-    await AxiosHttpRequest('POST', 'http://drocsid-web.herokuapp.com/auth/login', { email: 'admin@gmail.com', password: 'admin' }).then(data => {
-      console.log(data)
-      window.localStorage.setItem('data', data.data)
-      return data
-    }).then(data => {
-      const log = window.localStorage.getItem('data')
-      console.log(log)
-    })
-  }
-  /////////////////
 
   return (
     <Router>
@@ -52,8 +46,7 @@ const App = (): JSX.Element => {
             <ChatsContext.Provider value={{ chatsState, chatsDispatch }}>
 
               <div>Hello world!</div>
-              <button onClick={() => console.log(user)}></button>
-              <button onClick={attemptLogin}>Login</button>
+              <button onClick={(): void => console.log(user)}></button>
               <div>
                 <Link to='/'>Main</Link>
                 <Link to='/auth'>Auth</Link>

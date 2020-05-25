@@ -6,6 +6,7 @@ export interface MessageDetailsType {
   chatId: string;
   text: string;
   userId: string;
+  user: UserDetailsType;
 }
 
 export interface ChatDetailsType {
