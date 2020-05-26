@@ -13,30 +13,30 @@ import Auth from './pages/auth/Auth'
 import ChatsPage from './pages/chats/ChatsPage'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { UserContext } from './contexts/user/UserContext'
+import { UserContext, UserDetailsType } from './contexts/user/UserContext'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { ChatsContext } from './contexts/chats/ChatsContext';
+import { ChatsContext, ChatsContextType } from './contexts/chats/ChatsContext';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FriendsContext } from './contexts/friends/FriendsContext'
+import { FriendsContext, FriendsContextType } from './contexts/friends/FriendsContext'
 
-import { chatsReducer } from './contexts/chats/chatsReducer';
-import friendsReducer from './contexts/friends/friendsReducer';
-
+import { chatsReducer, initialChatsState } from './contexts/chats/chatsReducer';
+import { friendsReducer, initialFriendsState } from './contexts/friends/friendsReducer';
 
 
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const App = (): JSX.Element => {
-  const [user, setUser] = useState(undefined)
+  const [user, setUser] = useState({} as UserDetailsType)
 
-  const [chatsState, chatsDispatch] = useReducer(chatsReducer, null)
-  const [friendsState, friendsDispatch] = useReducer(friendsReducer, null)
+  const [chatsState, chatsDispatch] = useReducer(chatsReducer, initialChatsState)
+  const [friendsState, friendsDispatch] = useReducer(friendsReducer, initialFriendsState)
 
   useEffect(() => {
     getUser(setUser)
   }, [])
 
+  const isLoggedIn = !!user.id
 
   return (
     <Router>
@@ -44,21 +44,13 @@ const App = (): JSX.Element => {
         <UserContext.Provider value={{ user, setUser }}>
           <FriendsContext.Provider value={{ friendsState, friendsDispatch }}>
             <ChatsContext.Provider value={{ chatsState, chatsDispatch }}>
-
-              <div>Hello world!</div>
-              <button onClick={(): void => console.log(user)}></button>
-              <div>
-                <Link to='/'>Main</Link>
-                <Link to='/auth'>Auth</Link>
-                <Link to='/chats'>Chats</Link>
-              </div>
-
               <Switch>
+                {/* <Route exact path='/landing' component={Landing} /> */}
+                {isLoggedIn && <Route exact path='/chats' component={ChatsPage} />}
                 <Route exact path='/auth' component={Auth} />
-                <Route exact path='/chats' component={ChatsPage} />
-                <Redirect to='/' />
+                {!isLoggedIn && <Redirect to='/chats' />}
+                {!isLoggedIn && <Redirect to='/auth' />}
               </Switch>
-
             </ChatsContext.Provider>
           </FriendsContext.Provider>
         </UserContext.Provider>

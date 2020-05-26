@@ -1,52 +1,52 @@
-import { useReducer } from 'react'
-import { ChatsContext, ChatsContextType, ChatDetailsType } from './ChatsContext'
+import { ChatDetailsType, ChatsState, MessageDetailsType } from './ChatsContext'
 
-
-const GET_CHATS = 'GET_CHATS'
-const SET_CHAT = 'SET_CHAT'
-const CREATE_CHAT = 'CREATE_CHAT'
-const DELETE_CHAT = 'DELETE_CHAT'
-const ADD_MESSAGE = 'ADD_MESSAGE'
-
-const EMPTY_STATE = 'EMPTY_STATE'
-
-const initialState: ChatsContextType = {
+export const initialChatsState: ChatsState = {
   selectedChat: null,
-  chats: [],
+  chats: []
 }
 
-function chatsReducer(state = initialState, action: any): ChatsContextType {
+type getChatsAction = { type: 'GET_CHATS'; chats: ChatDetailsType[] }
+type setChatAction = { type: 'SET_CHAT'; chat: ChatDetailsType }
+type createChat = { type: 'CREATE_CHAT'; chat: ChatDetailsType }
+type deleteChat = { type: 'DELETE_CHAT'; chatId: string }
+type addMessage = { type: 'ADD_MESSAGE'; message: MessageDetailsType }
+type emptyState = { type: 'EMPTY_STATE' }
+
+export type Action = getChatsAction | setChatAction | createChat | deleteChat | addMessage | emptyState
+
+function chatsReducer(state: ChatsState, action: Action): ChatsState {
   let newState = { ...state }
   switch (action.type) {
-    case EMPTY_STATE:
-      newState = initialState
+    case 'EMPTY_STATE':
+      newState = initialChatsState
       return newState
-    case GET_CHATS:
+    case 'GET_CHATS':
       newState.chats = action.chats
       return newState;
 
-    case SET_CHAT:
+    case 'SET_CHAT':
       newState.selectedChat = action.chat
       return newState
 
-    case CREATE_CHAT:
+    case 'CREATE_CHAT':
       newState.chats = [...newState.chats, action.chat]
       return newState
 
-    case DELETE_CHAT:
+    case 'DELETE_CHAT':
       if (newState.selectedChat && newState.selectedChat.id === action.chatId) {
         newState.selectedChat = null
+        return newState
       }
 
       newState.chats = newState.chats.filter((chat: ChatDetailsType) => chat.id !== action.chatId)
       return newState
 
-    case ADD_MESSAGE:
-      if (newState.selectedChat && newState.selectedChat.id === action.message.id) {
+    case 'ADD_MESSAGE':
+      if (newState.selectedChat && newState.selectedChat.id === action.message.chatId) {
         newState.selectedChat.messages = [...newState.selectedChat.messages, action.message]
       }
       // eslint-disable-next-line no-case-declarations
-      const chatIdx = newState.chats.findIndex((chat: ChatDetailsType) => chat.id === action.message.id)
+      const chatIdx = newState.chats.findIndex((chat: ChatDetailsType) => chat.id === action.message.chatId)
       newState.chats[chatIdx].messages = [...newState.chats[chatIdx].messages, action.message]
 
       return newState

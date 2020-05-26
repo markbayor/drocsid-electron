@@ -49,20 +49,23 @@ const Navbar = (): JSX.Element => {
       })
   }
 
+  const filteredResults = searchResults.length && searchResults.filter(result => {
+    return result.id !== user.id && !friends.find((f: any) => f.id === result.id) && !incomingRequests.find((r: any) => r.id === result.id) && !sentRequests.find((r: any) => r.id === result.id) // FILTERRING HERE, MUST CHANGE IT. TODO
+  })
+
   return (
-    <Header>
-      <div className='search-form_container'>
+    <Header style={{ position: "fixed", width: '-webkit-fill-available', display: 'flex', zIndex: 50000 }}>
+      <h1 style={{ color: 'white' }}>DRØCSID</h1>
+      <div className='search-form_container' style={{ marginLeft: 100 }}>
         <Form style={{ justifyContent: 'center', marginTop: 12 }} form={form} name="horizontal_send_message" autoComplete='off' layout="inline">
           <Form.Item name="text">
             <Input onChange={(e: any): void => handleSearch(e.target.value)} type='text' allowClear placeholder="Enter user's username" style={{ width: 'calc(100vw - 350px)' }} />
           </Form.Item>
         </Form>
-      </div>
-      <div className='search-results_container' style={{ position: 'fixed', top: 0 }}>
-        <List>
-          {searchResults.length && searchResults.filter(result => {
-            return result.id !== user.id && !friends.find((f: any) => f.id === result.id) && !incomingRequests.find((r: any) => r.id === result.id) && !sentRequests.find((r: any) => r.id === result.id) // FILTERRING HERE, MUST CHANGE IT. TODO
-          }).map(result => {
+
+        {/* {searchResults.length && <div className='search-results_container' style={{ position: 'absolute', top: 0, backgroundColor: 'lightgray', zIndex: 20000, borderRadius: 2 }}> */}
+        {searchResults.length && <List style={{ position: 'absolute', top: 0, backgroundColor: 'lightgray', zIndex: 20000, borderRadius: 2, marginTop: 49 }}>
+          {filteredResults && filteredResults.map(result => {
             return (
               <List.Item key={result.id} style={{ padding: 8, border: 1, borderRadius: 5 }}>
                 <List.Item.Meta
@@ -73,10 +76,13 @@ const Navbar = (): JSX.Element => {
               </List.Item>
             )
           })}
-        </List>
+        </List>}
+        {/* </div>} */}
       </div>
-      <Button type="primary" onClick={handleLogout} icon={<LogoutOutlined />}>Log out</Button>
-    </Header >
+      <div className='logout-button_container'>
+        <Button type="primary" onClick={handleLogout} style={{ marginTop: 15, marginRight: 20 }} icon={<LogoutOutlined />}>Log out</Button>
+      </div>
+    </Header>
   )
 }
 

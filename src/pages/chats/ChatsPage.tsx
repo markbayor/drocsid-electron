@@ -16,12 +16,12 @@ import { ChatComponent } from './components/ChatComponent'
 
 function ChatsPage(): JSX.Element {
 
-  // STILL WORKS BITCH
   const { chatsState, chatsDispatch } = useContext(ChatsContext)
 
   function getChats(): void {
     AxiosHttpRequest('GET', 'http://drocsid-web.herokuapp.com/api/chats/all/populated')
       .then(({ data }) => {
+        console.log('CHATS DATA', data)
         chatsDispatch({ type: 'GET_CHATS', chats: data })
       })
       .catch(ex => console.log(ex))
@@ -34,7 +34,7 @@ function ChatsPage(): JSX.Element {
   return (
     <Layout>
       <Navbar />
-      <ChatsSidebar /> {/* Sider: SET_CHAT, CREATE_CHAT, DELETE_CHAT*/}
+      <ChatsSidebar />
       <ChatComponent />
     </Layout>
   )

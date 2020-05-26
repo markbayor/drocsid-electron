@@ -1,56 +1,56 @@
-import { useReducer } from 'react'
-import { FriendsContextType } from './FriendsContext'
+import { FriendsState } from './FriendsContext'
+import { UserDetailsType } from '../user/UserContext'
 
-const initialState: FriendsContextType = {
+export const initialFriendsState: FriendsState = {
   friends: [],
   incomingRequests: [],
   sentRequests: []
 }
 
-const GET_FRIENDS = 'GET_FRIENDS'
-const SEND_REQUEST = 'SEND_REQUEST'
-const DELETE_FRIEND = 'DELETE_FRIEND'
+type getFriendsAction = { type: 'GET_FRIENDS'; friends: UserDetailsType[] }
+type deleteFriendAction = { type: 'DELETE_FRIEND'; friendId: string }
+type sendRequestAction = { type: 'SEND_REQUEST'; request: UserDetailsType }
+type getRequestsAction = { type: 'GET_REQUESTS'; incomingRequests: UserDetailsType[]; sentRequests: UserDetailsType[] }
+type acceptRequestAction = { type: 'ACCEPT_REQUEST'; friend: UserDetailsType }
+type rejectRequestAction = { type: 'REJECT_REQUEST'; requesterId: string }
+type cancelRequestAction = { type: 'CANCEL_REQUEST'; friendId: string }
+type emptyStateAction = { type: 'EMPTY_STATE' }
 
-const GET_REQUESTS = 'GET_REQUESTS'
-const ACCEPT_REQUEST = 'ACCEPT_REQUEST'
-const REJECT_REQUEST = 'REJECT_REQUEST'
-const CANCEL_REQUEST = 'CANCEL_REQUEST'
+export type Action = getFriendsAction | deleteFriendAction | sendRequestAction | getRequestsAction | acceptRequestAction | rejectRequestAction | cancelRequestAction | emptyStateAction
 
-const EMPTY_STATE = 'EMPTY_STATE'
-
-export default function (state = initialState, action: any): FriendsContextType {
-  let newState = { ...state }
+export function friendsReducer(state: FriendsState, action: Action): FriendsState {
+  let newState: FriendsState = { ...state }
   switch (action.type) {
-    case EMPTY_STATE:
-      newState = initialState
+    case 'EMPTY_STATE':
+      newState = initialFriendsState
       return newState
-    case GET_FRIENDS:
+    case 'GET_FRIENDS':
       newState.friends = action.friends
       return newState
 
-    case DELETE_FRIEND:
+    case 'DELETE_FRIEND':
       newState.friends = newState.friends.filter(friend => friend.id !== action.friendId)
       return newState
 
-    case SEND_REQUEST:
+    case 'SEND_REQUEST':
       newState.sentRequests = [...newState.sentRequests, action.request]
       return newState
 
-    case GET_REQUESTS:
+    case 'GET_REQUESTS':
       newState.incomingRequests = action.incomingRequests
       newState.sentRequests = action.sentRequests
       return newState
 
-    case ACCEPT_REQUEST:
+    case 'ACCEPT_REQUEST':
       newState.friends = [...newState.friends, action.friend]
       newState.incomingRequests = newState.incomingRequests.filter(request => request.id !== action.friend.id)
       return newState
 
-    case REJECT_REQUEST:
+    case 'REJECT_REQUEST':
       newState.incomingRequests = newState.incomingRequests.filter(request => request.id !== action.requesterId)
       return newState
 
-    case CANCEL_REQUEST:
+    case 'CANCEL_REQUEST':
       newState.sentRequests = newState.sentRequests.filter(request => request.id !== action.friendId)
       return newState
 

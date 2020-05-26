@@ -1,8 +1,7 @@
-import React, { useContext, useRef, useEffect, useState, FormEvent } from 'react'
+import React, { useContext, useRef, useEffect, useState } from 'react'
 import { AxiosHttpRequest } from '../../../utils';
 
 import { UserContext, UserDetailsType } from '../../../contexts/user/UserContext'
-import { FriendsContext } from '../../../contexts/friends/FriendsContext'
 import { ChatsContext, MessageDetailsType } from '../../../contexts/chats/ChatsContext'
 
 import { Empty, Form, Layout, List, Avatar, Input, Button } from 'antd';
@@ -23,7 +22,8 @@ const ChatComponent = () => {
 
   useEffect(() => {
     scrollToBottom()
-  }, [selectedChat.messages])
+  }, [selectedChat])
+
 
   function send(): void {
     AxiosHttpRequest('POST', 'http://drocsid-web.herokuapp.com/api/messages/new', { chatId: selectedChat.id, text, username: user.username })
@@ -34,16 +34,18 @@ const ChatComponent = () => {
       })
   }
 
+  const selectedChatUsers = selectedChat && selectedChat.users && selectedChat.users.filter((u: UserDetailsType) => u.username !== user.username).map((u: UserDetailsType) => u.username).join(', ')
+
   return (
-    <Layout className="site-layout" style={{ marginLeft: 198 }}>
+    <Layout className="site-layout" style={{ height: '100vh' }}>
       <Header className="site-layout-background" style={{ zIndex: 1000, padding: 0, color: 'white', position: 'fixed', top: 64, right: 0, width: 'calc(100vw - 200px)', alignItems: 'center', justifyContent: 'center' }}>
-        <h2>Chat with {selectedChat.users && selectedChat.users.filter((u: UserDetailsType) => u.username !== user.username).map((u: UserDetailsType) => u.username).join(', ')}</h2>
+        <h1 style={{ marginLeft: 30, color: 'white' }}>Chat with {selectedChatUsers} </h1>
       </Header>
       <Content style={{ margin: '90px 16px 65px ', overflow: 'initial', top: 0 }}>
 
-        <div className="site-layout-background" style={{ padding: '22px 22px 90px 22px', minHeight: 400, backgroundColor: 'white', boxShadow: '0px 0px 8px 1px rgba(138,135,138,1)' }}>
+        <div className="site-layout-background" style={{ padding: '50px 22px 25px 22px', minHeight: 400, backgroundColor: 'white', boxShadow: '0px 0px 8px 1px rgba(138,135,138,1)', marginLeft: 200 }}>
           <List itemLayout="horizontal">
-            {selectedChat.messages && selectedChat.messages.length ? selectedChat.messages.map((message: MessageDetailsType) => {
+            {selectedChat && selectedChat.messages && selectedChat.messages.length ? selectedChat.messages.map((message: MessageDetailsType) => {
               const isSentByMe = message.userId === user.id
 
               return (
@@ -51,7 +53,7 @@ const ChatComponent = () => {
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                     {!isSentByMe && <Avatar style={{ marginRight: 10 }} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                     <div>
-                      <h4 style={{ textAlign: isSentByMe ? 'right' : 'left' }}>{message.user.username}</h4>
+                      {/* <h4 style={{ textAlign: isSentByMe ? 'right' : 'left' }}>{message.user.username}</h4> */}
                       <div style={{ textAlign: isSentByMe ? 'right' : 'left', color: isSentByMe ? 'white' : '#595959' }}>{message.text}</div>
                     </div>
                     {isSentByMe && <Avatar style={{ marginLeft: 10 }} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
@@ -65,7 +67,7 @@ const ChatComponent = () => {
         </div>
 
       </Content>
-      {selectedChat.id && <Footer style={{ textAlign: 'center', position: 'fixed', bottom: 0, width: '100%' }}>
+      {selectedChat && selectedChat.id && <Footer style={{ textAlign: 'center', position: 'fixed', bottom: 0, width: '100%', marginLeft: 200 }}>
         <Form form={form} name="horizontal_send_message" autoComplete='off' layout="inline" onFinish={send}>
           <Form.Item
             name="text"
@@ -85,3 +87,5 @@ const ChatComponent = () => {
     </Layout>
   )
 }
+
+export { ChatComponent }

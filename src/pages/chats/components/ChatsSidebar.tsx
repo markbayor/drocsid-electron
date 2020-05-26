@@ -68,12 +68,13 @@ const ChatsSidebar = (): JSX.Element => {
 
     if (existingChat) {
       chatsDispatch({ type: 'SET_CHAT', chat: existingChat })
-
+      chatsDispatch({ type: 'CREATE_CHAT', chat: existingChat })
     } else {
       AxiosHttpRequest('POST', `http://drocsid-web.herokuapp.com/api/chats/single/new`, { partnerId: friendId })
         .then(response => {
           const chat: ChatDetailsType = response.data
           chatsDispatch({ type: 'SET_CHAT', chat })
+          chatsDispatch({ type: 'CREATE_CHAT', chat })
         })
         .catch(ex => console.log(ex))
     }
@@ -101,7 +102,8 @@ const ChatsSidebar = (): JSX.Element => {
       overflow: 'auto',
       height: '100vh',
       position: 'fixed',
-      left: 0
+      left: 0,
+      paddingTop: 128
     }}>
       <Menu theme="light" mode="inline">
         <Collapse>
@@ -113,7 +115,7 @@ const ChatsSidebar = (): JSX.Element => {
                   <Panel header={<span><span>Sent</span></span>} key="1">
                     {sentRequests.map((request: UserDetailsType) => {
                       return (
-                        <div key={request.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div key={request.id} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'baseline' }}>
                           <h4>{request.username}</h4>{' '}<Button icon={<CloseSquareOutlined />} onClick={(): void => handleCancelFriendRequest(request.id)}></Button>
                         </div>
                       )
@@ -140,7 +142,7 @@ const ChatsSidebar = (): JSX.Element => {
             {friends.map((friend: UserDetailsType) => {
               return (
                 <Collapse key={friend.id}>
-                  <Panel header={<span><UserOutlined />{friend.username}</span>} key={idx}>
+                  <Panel header={<span><UserOutlined />{friend.username}</span>} key={friend.id}>
                     <Button onClick={(): void => handleClickOnChatWithFriend(friend.id)} icon={<MessageOutlined />}>Chat!</Button>
                     <Button onClick={(): void => handleDeleteFriend(friend.id)} icon={<DeleteOutlined />}>Delete :(</Button>
                   </Panel>

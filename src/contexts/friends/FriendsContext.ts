@@ -1,10 +1,20 @@
+import React from 'react'
 import { createContext } from 'react'
 import { UserDetailsType } from '../user/UserContext'
 
-export type FriendsContextType = {
+import { Action } from './friendsReducer'
+export interface FriendsState {
   friends: UserDetailsType[];
   incomingRequests: UserDetailsType[];
   sentRequests: UserDetailsType[];
 }
 
-export const FriendsContext = createContext({})
+
+export type FriendsContextType = {
+  friendsState: FriendsState;
+  friendsDispatch: React.Dispatch<Action>;
+}
+
+const FriendsContext = createContext<Partial<FriendsContextType>>({})
+
+export { FriendsContext }

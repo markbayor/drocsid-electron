@@ -1,5 +1,6 @@
 import React, { createContext } from 'react'
 import { UserDetailsType } from '../user/UserContext';
+import { Action } from './chatsReducer'
 
 export interface MessageDetailsType {
   id: string;
@@ -17,9 +18,14 @@ export interface ChatDetailsType {
   users: UserDetailsType[];
 }
 
-export type ChatsContextType = {
-  selectedChat: null | ChatDetailsType;
+export interface ChatsState {
+  selectedChat: ChatDetailsType;
   chats: ChatsContextType[] | any;
 }
 
-export const ChatsContext = createContext({})
+export type ChatsContextType = {
+  chatsState: ChatsState;
+  chatsDispatch: React.Dispatch<Action>;
+}
+
+export const ChatsContext = createContext<Partial<ChatsContextType>>({})
