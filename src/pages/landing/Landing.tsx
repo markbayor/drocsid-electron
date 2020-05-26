@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../contexts/user/UserContext'

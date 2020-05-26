@@ -20,6 +20,7 @@ export interface ChatDetailsType {
 
 export interface ChatsState {
   selectedChat: ChatDetailsType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   chats: ChatsContextType[] | any;
 }
 

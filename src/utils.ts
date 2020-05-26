@@ -12,6 +12,7 @@ export const removeJwt = (): void => {
   window.localStorage.removeItem('accessToken')
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const AxiosHttpRequest = async (method: string, url: string, data?: object | undefined): Promise<Record<string, any>> => {
   switch (method) {
     case 'GET':
@@ -36,6 +37,7 @@ export const AxiosHttpRequest = async (method: string, url: string, data?: objec
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getUser = (setUser: any): void => {
   AxiosHttpRequest('GET', 'http://drocsid-web.herokuapp.com/auth/me')
     .then((response) => {

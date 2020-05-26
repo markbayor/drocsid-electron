@@ -1,6 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useContext, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import { AxiosHttpRequest } from '../../utils'
 import { ChatsContext } from '../../contexts/chats/ChatsContext'
 import { UserContext } from '../../contexts/user/UserContext'
@@ -8,7 +7,7 @@ import { UserContext } from '../../contexts/user/UserContext'
 import { default as socket } from '../../socket'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Layout, message } from 'antd'
+import { Layout } from 'antd'
 
 
 
@@ -24,8 +23,7 @@ import { ChatComponent } from './components/ChatComponent'
 function ChatsPage(): JSX.Element {
 
   const { user } = useContext(UserContext)
-  const { chatsState, chatsDispatch } = useContext(ChatsContext)
-  const history = useHistory()
+  const { chatsDispatch } = useContext(ChatsContext)
 
   function getChats(): void {
     AxiosHttpRequest('GET', 'http://drocsid-web.herokuapp.com/api/chats/all/populated')
@@ -38,6 +36,7 @@ function ChatsPage(): JSX.Element {
 
   useEffect(() => {
     getChats()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     socket.on('message', (response: any) => {
       if (response.message.userId !== user.id) {
         chatsDispatch({ type: 'ADD_MESSAGE', message: response.message })

@@ -1,5 +1,4 @@
-import React from 'react'
-import { createContext } from 'react'
+import React, { createContext } from 'react'
 import { UserDetailsType } from '../user/UserContext'
 
 import { Action } from './friendsReducer'

@@ -1,4 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useContext, useState } from 'react'
 import ReactDOM, { useHistory } from 'react-router-dom'
 import { AxiosHttpRequest, removeJwt } from '../../../utils'
 

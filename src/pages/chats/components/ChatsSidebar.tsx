@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext, useEffect } from 'react';
 import { ChatsContext, ChatDetailsType } from '../../../contexts/chats/ChatsContext'
 import { FriendsContext } from '../../../contexts/friends/FriendsContext'

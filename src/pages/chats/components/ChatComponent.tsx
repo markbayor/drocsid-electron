@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext, useRef, useEffect, useState } from 'react'
 import { AxiosHttpRequest } from '../../../utils';
 
@@ -7,11 +9,11 @@ import { ChatsContext, MessageDetailsType } from '../../../contexts/chats/ChatsC
 import { Empty, Form, Layout, List, Avatar, Input, Button } from 'antd';
 const { Header, Content, Footer } = Layout;
 
-const ChatComponent = () => {
+const ChatComponent = (): JSX.Element => {
   const [form] = Form.useForm()
   const [text, setText] = useState('')
   const messagesEndRef = useRef(null)
-  const scrollToBottom = () => {
+  const scrollToBottom = (): void => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
   }
 
@@ -19,10 +21,11 @@ const ChatComponent = () => {
   const { user } = useContext(UserContext)
   const { chatsState, chatsDispatch } = useContext(ChatsContext)
   const { selectedChat } = chatsState
+  const { messages } = selectedChat
 
   useEffect(() => {
     scrollToBottom()
-  }, [selectedChat])
+  }, [messages])
 
 
   function send(): void {
