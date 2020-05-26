@@ -33,7 +33,7 @@ const LoginForm = () => {
 
   return (
     <Form form={form} onFinish={handleLoginAttempt}>
-      <Form.Item name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
+      <Form.Item name="email" rules={[{ required: true, message: 'Please input your email' }]}>
         <Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
       </Form.Item>
       <Form.Item name="password" rules={[{ required: true, message: 'Please enter your password' }]}>

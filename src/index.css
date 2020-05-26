@@ -7,3 +7,28 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.auth-welcome_message {
+  padding: 20px;
+}
+
+.auth-forms_container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+
+.login-form_container {
+  padding: 30px;
+  box-shadow: grey 0px 1px 7px 1px;
+  margin: 10px;
+  margin-left: 30px
+}
+
+.signup-form_container {
+  padding: 30px;
+  border-left: solid 1px gray;
+  box-shadow: grey 0px 1px 7px 1px;
+  margin: 10px;
+  margin-right: 30px
+}

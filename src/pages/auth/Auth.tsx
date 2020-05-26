@@ -13,12 +13,14 @@ function Auth(): JSX.Element {
     <Layout className='auth-page_container'>
       <div>
         <Content className='auth-page-content_container'>
-          <h1>Welcome to Drocsid! Log in or sign up!</h1>
-          <div className='auth-forms_container'>
+          <h1 className='auth-welcome_message'>Welcome to Drocsid! Log in or sign up!</h1>
+          <div className='auth-forms_container' style={{ display: 'flex' }}>
             <div className='login-form_container'>
+              <h2>Log in</h2>
               <LoginForm />
             </div>
             <div className='signup-form_container'>
+              <h2>Sign up</h2>
               <SignupForm />
             </div>
           </div>

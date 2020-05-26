@@ -59,7 +59,7 @@ const SignupForm = () => {
       </Form.Item>
       <Form.Item name="submit">
         <Button type="primary" htmlType="submit">
-          Log in
+          Sign up
         </Button>
       </Form.Item>
     </Form>
