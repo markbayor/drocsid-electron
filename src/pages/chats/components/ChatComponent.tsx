@@ -31,9 +31,7 @@ const ChatComponent = (): JSX.Element => {
     AxiosHttpRequest('POST', 'http://drocsid-web.herokuapp.com/api/messages/new', { chatId: selectedChat.id, text, username: user.username })
       .then((response) => {
         const { message } = response.data
-        message.user = user
         chatsDispatch({ type: 'ADD_MESSAGE', message })
-        scrollToBottom()
       })
   }
 

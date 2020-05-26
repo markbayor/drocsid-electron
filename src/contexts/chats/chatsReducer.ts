@@ -42,6 +42,7 @@ function chatsReducer(state: ChatsState, action: Action): ChatsState {
       return newState
 
     case 'ADD_MESSAGE':
+      console.log('ACTION', action)
       if (newState.selectedChat && newState.selectedChat.id === action.message.chatId) {
         newState.selectedChat.messages = [...newState.selectedChat.messages, action.message]
         return newState
