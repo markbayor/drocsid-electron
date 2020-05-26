@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import ReactDOM, { useHistory } from 'react-router-dom'
-import { AxiosHttpRequest } from '../../../utils'
+import { AxiosHttpRequest, removeJwt } from '../../../utils'
 
 import { UserContext } from '../../../contexts/user/UserContext'
 import { FriendsContext } from '../../../contexts/friends/FriendsContext'
@@ -27,8 +27,9 @@ const Navbar = (): JSX.Element => {
   function handleLogout(): void {
     friendsDispatch({ type: 'EMPTY_STATE' })
     chatsDispatch({ type: 'EMPTY_STATE' })
+    removeJwt()
     setUser(null)
-    history.push('/auth')
+    history.push('/')
   }
 
   function handleSearch(searchVal: string): void {

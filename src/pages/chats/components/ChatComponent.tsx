@@ -43,7 +43,7 @@ const ChatComponent = () => {
       </Header>
       <Content style={{ margin: '90px 16px 65px ', overflow: 'initial', top: 0 }}>
 
-        <div className="site-layout-background" style={{ padding: '50px 22px 25px 22px', minHeight: 400, backgroundColor: 'white', boxShadow: '0px 0px 8px 1px rgba(138,135,138,1)', marginLeft: 200 }}>
+        <div className="site-layout-background" style={{ padding: '50px 22px 100px 22px', minHeight: 400, backgroundColor: 'white', boxShadow: '0px 0px 8px 1px rgba(138,135,138,1)', marginLeft: 200 }}>
           <List itemLayout="horizontal">
             {selectedChat && selectedChat.messages && selectedChat.messages.length ? selectedChat.messages.map((message: MessageDetailsType) => {
               const isSentByMe = message.userId === user.id
@@ -53,7 +53,7 @@ const ChatComponent = () => {
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                     {!isSentByMe && <Avatar style={{ marginRight: 10 }} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                     <div>
-                      {/* <h4 style={{ textAlign: isSentByMe ? 'right' : 'left' }}>{message.user.username}</h4> */}
+                      <h4 style={{ textAlign: isSentByMe ? 'right' : 'left' }}>{message.user.username}</h4>
                       <div style={{ textAlign: isSentByMe ? 'right' : 'left', color: isSentByMe ? 'white' : '#595959' }}>{message.text}</div>
                     </div>
                     {isSentByMe && <Avatar style={{ marginLeft: 10 }} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
