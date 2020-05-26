@@ -21,11 +21,10 @@ const ChatComponent = (): JSX.Element => {
   const { user } = useContext(UserContext)
   const { chatsState, chatsDispatch } = useContext(ChatsContext)
   const { selectedChat } = chatsState
-  const { messages } = selectedChat
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages])
+  }, [selectedChat])
 
 
   function send(): void {
@@ -34,6 +33,7 @@ const ChatComponent = (): JSX.Element => {
         const { message } = response.data
         message.user = user
         chatsDispatch({ type: 'ADD_MESSAGE', message })
+        scrollToBottom()
       })
   }
 
