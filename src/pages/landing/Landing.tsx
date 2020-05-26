@@ -14,6 +14,7 @@ const Landing = (): JSX.Element => {
       {/* <img src='../../assets/00223-Spiral-gear-logo-design-free-logos-online-01.png' />  TODO*/}
       <div>
         <Link to='/auth'>Log in</Link>
+        {'   '}
         {user && user.id && <Link to='/chats'>Go to your chats</Link>}
       </div>
     </div>

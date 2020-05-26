@@ -69,7 +69,7 @@ const ChatsSidebar = (): JSX.Element => {
 
     if (existingChat) {
       chatsDispatch({ type: 'SET_CHAT', chat: existingChat })
-      chatsDispatch({ type: 'CREATE_CHAT', chat: existingChat })
+      // chatsDispatch({ type: 'CREATE_CHAT', chat: existingChat })
     } else {
       AxiosHttpRequest('POST', `http://drocsid-web.herokuapp.com/api/chats/single/new`, { partnerId: friendId })
         .then(response => {

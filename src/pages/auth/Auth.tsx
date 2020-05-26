@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 
 import { LoginForm } from './forms/LoginForm'
 import { SignupForm } from './forms/SignupForm'
 
 import { Layout } from 'antd'
-import { formatCountdown } from 'antd/lib/statistic/utils';
 const { Content, Footer } = Layout;
 
 

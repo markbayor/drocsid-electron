@@ -32,6 +32,7 @@ const ChatComponent = (): JSX.Element => {
       .then((response) => {
         const { message } = response.data
         chatsDispatch({ type: 'ADD_MESSAGE', message })
+        scrollToBottom()
       })
   }
 
@@ -39,7 +40,7 @@ const ChatComponent = (): JSX.Element => {
 
   return (
     <Layout className="site-layout" style={{ height: '100vh' }}>
-      <Header className="site-layout-background" style={{ zIndex: 1000, padding: 0, color: 'white', position: 'fixed', top: 64, right: 0, width: 'calc(100vw - 200px)', alignItems: 'center', justifyContent: 'center' }}>
+      <Header className="site-layout-background" style={{ zIndex: 1000, padding: 0, color: 'white', position: 'fixed', top: 64, right: 0, width: 'calc(100vw - 200px)', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 5px -5px #333;' }}>
         <h1 style={{ marginLeft: 30, color: 'white' }}>Chat with {selectedChatUsers} </h1>
       </Header>
       <Content style={{ margin: '90px 16px 65px ', overflow: 'initial', top: 0 }}>

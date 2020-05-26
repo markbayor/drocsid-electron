@@ -59,7 +59,7 @@ const Navbar = (): JSX.Element => {
   return (
     <Header style={{ position: "fixed", width: '-webkit-fill-available', display: 'flex', zIndex: 50000 }}>
       <h1 style={{ color: 'white' }}>DRØCSID</h1>
-      <div className='search-form_container' style={{ marginLeft: 100 }}>
+      <div className='search-form_container' style={{ marginLeft: 80 }}>
         <Form style={{ justifyContent: 'center', marginTop: 12 }} form={form} name="horizontal_send_message" autoComplete='off' layout="inline">
           <Form.Item name="text">
             <Input onChange={(e: any): void => handleSearch(e.target.value)} type='text' allowClear placeholder="Enter user's username" style={{ width: 'calc(100vw - 350px)' }} />
