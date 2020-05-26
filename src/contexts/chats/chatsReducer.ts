@@ -43,11 +43,9 @@ function chatsReducer(state: ChatsState, action: Action): ChatsState {
 
     case 'ADD_MESSAGE':
       if (newState.selectedChat && newState.selectedChat.id === action.message.chatId) {
-        console.log('hitting first')
         newState.selectedChat.messages = [...newState.selectedChat.messages, action.message]
         return newState
       }
-      console.log('hitting second')
       // eslint-disable-next-line no-case-declarations
       const chatIdx = newState.chats.findIndex((chat: ChatDetailsType) => chat.id === action.message.chatId)
       newState.chats[chatIdx].messages = [...newState.chats[chatIdx].messages, action.message]
