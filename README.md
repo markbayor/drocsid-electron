@@ -1,2 +1,5 @@
--yarn
--yarn start
+-$ yarn
+
+-$ yarn start
+
+-$ yarn make
