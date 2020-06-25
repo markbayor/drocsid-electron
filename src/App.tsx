@@ -39,8 +39,7 @@ const App = (): JSX.Element => {
   }, [])
 
   const isLoggedIn = !!user
-  console.log('ISLOGGEDIN', isLoggedIn)
-  console.log('USER', user)
+
   return (
     <Router>
       <div className='app_container'>

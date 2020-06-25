@@ -24,7 +24,7 @@ function ChatsPage(): JSX.Element {
 
   const { user, setUser } = useContext(UserContext)
   const { chatsDispatch } = useContext(ChatsContext)
-  console.log('USER IN PAGE', user)
+
   function getChats(): void {
     AxiosHttpRequest('GET', 'http://drocsid-web.herokuapp.com/api/chats/all/populated')
       .then(({ data }) => {

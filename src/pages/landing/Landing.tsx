@@ -7,8 +7,6 @@ const Landing = (): JSX.Element => {
 
   const { user } = useContext(UserContext)
 
-  console.log('USER IND LANDING', user)
-
   return (
     <div>
       <h1 style={{ color: 'white' }}>Re-think chatting</h1>

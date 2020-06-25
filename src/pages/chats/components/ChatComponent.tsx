@@ -3,6 +3,8 @@
 import React, { useContext, useRef, useEffect, useState } from 'react'
 import { AxiosHttpRequest } from '../../../utils';
 
+import { default as socket } from '../../../socket'
+
 import { UserContext, UserDetailsType } from '../../../contexts/user/UserContext'
 import { ChatsContext, MessageDetailsType } from '../../../contexts/chats/ChatsContext'
 
@@ -31,6 +33,7 @@ const ChatComponent = (): JSX.Element => {
     AxiosHttpRequest('POST', 'http://drocsid-web.herokuapp.com/api/messages/new', { chatId: selectedChat.id, text, username: user.username })
       .then((response) => {
         const { message } = response.data
+
         chatsDispatch({ type: 'ADD_MESSAGE', message })
         scrollToBottom()
       })
